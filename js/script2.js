@@ -1,62 +1,3 @@
-const productos = [
-    {
-        id: 1,
-        titulo: "Mamaderas",
-        imagen: "./img/MAMADERA.jpg",
-        precio: 800,
-        cantidad: 1,
-    },
-    {
-        id: 2,
-        titulo: "Vasos",
-        imagen: "./img/VASOS.jpg",
-        precio: 750,
-        cantidad: 1,
-    },
-    {
-        id: 3,
-        titulo: "Chupetes",
-        imagen: "./img/CHUPETES.png",
-        precio: 1200,
-        cantidad: 1,
-    },
-    {
-        id: 4,
-        titulo: "Platos",
-        imagen: "./img/PLATOS.jpg",
-        precio: 1000,
-        cantidad: 1,
-    },
-    {
-        id: 5,
-        titulo: "Cubiertos",
-        imagen: "./img/CUBIERTOS.jpg",
-        precio: 500,
-        cantidad: 1,
-    },
-    {
-        id: 6,
-        titulo: "Baberos",
-        imagen: "./img/BABEROS.jpg",
-        precio: 400,
-        cantidad: 1,
-    },
-    {
-        id: 7,
-        titulo: "Portachupetes",
-        imagen: "./img/PORTACHUPETES.jpeg",
-        precio: 300,
-        cantidad: 1,
-    },
-    {
-        id: 8,
-        titulo: "Sonajero",
-        imagen: "./img/SONAJERO.jpg",
-        precio: 800,
-        cantidad: 1,
-    }
-]
-
 const contenedorProductos = document.getElementById("contenedor-productos")
 const carritoCompras = document.getElementById("carritoCompras")
 const contenedorCarrito = document.getElementById("contenedor-carrito")
@@ -70,7 +11,7 @@ productos.forEach((producto) => {
     content.innerHTML = `
     <img class= "producto-imagen" src= "${producto.imagen}"
     <h3 >${producto.titulo}</h3>
-    <p class= "producto-precio">${producto.precio} $</p>
+    <p class= "producto-precio">$ ${producto.precio}</p>
     `
     contenedorProductos.append(content)
 
@@ -79,6 +20,17 @@ productos.forEach((producto) => {
     comprar.className = "producto-comprar"
 
     content.append(comprar)
+
+    comprar.addEventListener("click", () => {
+        Toastify({
+
+            text: "Agregaste un producto al carrito 🛒",
+            duration: 3000,
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+        }).showToast();
+    })
 
     comprar.addEventListener("click", () => {
         const repeat = carrito.some((repeatProduct) => repeatProduct.id === producto.id)
@@ -99,7 +51,8 @@ productos.forEach((producto) => {
                 cantidad: producto.cantidad
             })
         }
-        console.log(carrito)
+        
+        pintarCarrito()
         carritoContador()
         saveLocal()
     })
@@ -116,7 +69,7 @@ const pintarCarrito = () => {
     contenedorCarrito.append(carritoHeader)
 
     const carritoBoton = document.createElement("h1")
-    carritoBoton.innerText = "vaciar carrito"
+    carritoBoton.innerText = "X"
     carritoBoton.className = "carrito-boton"
     carritoBoton.addEventListener("click", () => {
         contenedorCarrito.style.display = "none"
@@ -140,7 +93,7 @@ const pintarCarrito = () => {
 
         let eliminar = carritoContent.querySelector(".delete-producto")
 
-        eliminar.addEventListener("click", () =>{
+        eliminar.addEventListener("click", () => {
             eliminarProducto(producto.id)
         })
 
@@ -151,9 +104,19 @@ const pintarCarrito = () => {
     const totalCompra = document.createElement("div")
     totalCompra.className = "total-compra"
     totalCompra.innerHTML = `Total a pagar: $${total}`
+    
 
     contenedorCarrito.append(totalCompra)
+
+    const vaciarCarrito = document.createElement("div")
+    vaciarCarrito.className = "vaciar-carrito"
+    vaciarCarrito.innerHTML = "vaciar"
+    vaciarCarrito.id = "vaciar-carro"
+
+    contenedorCarrito.append(vaciarCarrito)
+
 }
+
 
 carritoCompras.addEventListener("click", pintarCarrito)
 
@@ -177,8 +140,8 @@ const carritoContador = () => {
 
 carritoContador()
 
-/* LOCAL STORAGE */
+
 const saveLocal = () => {
-localStorage.setItem("carrito", JSON.stringify(carrito))
+    localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 

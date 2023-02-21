@@ -122,6 +122,9 @@ main{
 .delete-producto{
     cursor: pointer;
 }
+.vaciar-carrito{
+    cursor: pointer;
+}
 footer {
     background-color: #c728aac7;
 }
