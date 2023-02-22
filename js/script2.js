@@ -115,12 +115,16 @@ const obtenerProductos = async () => {
         const totalCompra = document.createElement("div")
         totalCompra.className = "total-compra"
         totalCompra.innerHTML = `Total a pagar: $${total}`
-        
-    
+
         contenedorCarrito.append(totalCompra)
-    
+
+        let finCompra = contenedorCarrito.querySelector(".total-compra")
+
+        finCompra.addEventListener("click", () => {
+            location.href = "form.html"
+        })
+
     }
-    
     
     carritoCompras.addEventListener("click", pintarCarrito)
     

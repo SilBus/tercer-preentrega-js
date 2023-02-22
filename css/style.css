@@ -68,7 +68,7 @@ main{
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    background-color: #cac6c6;
+    background-color: #c728aa1e;
     width: 50%;
     margin-top: 50px;
 }
@@ -81,11 +81,20 @@ main{
     gap: 5rem;
     font-family:sans-serif;
 }
-.carrito-header-titulo, .total-compra{
+.carrito-header-titulo{
     color: #c728aac7;
     font-size: 2rem;
-    padding: 2rem;
-    
+    padding: 2rem;   
+}
+.total-compra{
+    background-color: #c728aac7;
+    color: #ffffff;
+    font-size: 1.5rem;
+    max-width: 30%;
+    border-radius: 1rem;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 1rem;
 }
 .carrito-boton{
     font-size: 1.5rem;
@@ -148,4 +157,14 @@ footer .container-fluid ul li a:hover {
     font-weight: bold;
     color: black;
 }
-
+.formCont{
+    min-height: 500px;
+    max-width: 400px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+    background: #c728aa69;
+    backdrop-filter: blur(10px);
+}
