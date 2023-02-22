@@ -24,7 +24,7 @@ productos.forEach((producto) => {
     comprar.addEventListener("click", () => {
         Toastify({
 
-            text: "Agregaste un producto al carrito 🛒",
+            text: "Agregaste un producto al carrito ✔",
             duration: 3000,
             style: {
                 background: "linear-gradient(to right, #00b09b, #96c93d)",
@@ -69,11 +69,18 @@ const pintarCarrito = () => {
     contenedorCarrito.append(carritoHeader)
 
     const carritoBoton = document.createElement("h1")
-    carritoBoton.innerText = "X"
+    carritoBoton.innerText = "Vaciar Carrito"
     carritoBoton.className = "carrito-boton"
     carritoBoton.addEventListener("click", () => {
         contenedorCarrito.style.display = "none"
+
+        carrito = []
+        carritoContador()
+        saveLocal()
+        Swal.fire('Vaciaste Tu Carrito 😒')
     })
+
+   
 
     carritoHeader.append(carritoBoton)
 
@@ -108,13 +115,6 @@ const pintarCarrito = () => {
 
     contenedorCarrito.append(totalCompra)
 
-    const vaciarCarrito = document.createElement("div")
-    vaciarCarrito.className = "vaciar-carrito"
-    vaciarCarrito.innerHTML = "vaciar"
-    vaciarCarrito.id = "vaciar-carro"
-
-    contenedorCarrito.append(vaciarCarrito)
-
 }
 
 
@@ -140,6 +140,9 @@ const carritoContador = () => {
 
 carritoContador()
 
+setTimeout( () => {
+    Swal.fire('COMPRA HOY CON UN 50% OFF! ❤')
+}, 3000)
 
 const saveLocal = () => {
     localStorage.setItem("carrito", JSON.stringify(carrito))
